@@ -24,10 +24,6 @@ end
 include_recipe 'apache2::default'
 include_recipe 'apache2::mod_rewrite'
 
-apache_site '000-default' do
-  enable false
-end
-
 template "#{node['apache']['dir']}/sites-available/munin.conf" do
   source 'apache2.conf.erb'
   mode   '0644'
@@ -36,4 +32,6 @@ template "#{node['apache']['dir']}/sites-available/munin.conf" do
   end
 end
 
-apache_site 'munin.conf'
+apache_site 'munin' do
+	enable true
+end
