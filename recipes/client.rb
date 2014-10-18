@@ -41,6 +41,10 @@ end
 
 munin_server_ips << '127.0.0.1' unless munin_server_ips.include?('127.0.0.1')
 
+if platform_family?("rhel")
+  include_recipe 'yum-epel'
+end
+
 package 'munin-node'
 
 template "#{node['munin']['basedir']}/munin-node.conf" do
